@@ -15,7 +15,51 @@
     </ul>
   </form>
 <script>
-const endpoint = 'gb.json';
+  const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  //const endpoint = 'https://simplemaps.com/static/data/country-cities/gb/gb.json';
+  const cities = [];
+  const searchBox = document.querySelector('.search');
+  const searchList = document.querySelector('.suggestions');
+
+  fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => cities.push(...data));
+
+  searchBox.addEventListener('change', displayMatches);
+  searchBox.addEventListener('keyup', displayMatches);
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function findMatches(wordToMatch, cities) {
+    return cities.filter(location => {
+      const regex = new RegExp(wordToMatch, 'gi');
+      return location.city.match(regex) || location.state.match(regex);
+    });
+  }
+
+  function displayMatches() {
+    const matches = findMatches(this.value, cities);
+
+    const newHTML = matches.map(location => {
+      const regex = new RegExp(this.value, 'gi');
+      
+      const cityName = location.city.replace(regex, `<span class=hl>${this.value}</span>`);
+      const stateName = location.state.replace(regex, `<span class=hl>${this.value}</span>`);
+
+      return `
+        <li>
+          <span class="place">${cityName}, ${stateName}</span>
+          <span class="population">${numberWithCommas(location.population)}</span>
+        </li>
+       `;
+      }).join('');
+    
+      searchList.innerHTML = newHTML;
+  }
+  
+
 
 </script>
 </body>
