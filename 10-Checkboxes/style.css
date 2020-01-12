@@ -1,0 +1,41 @@
+html, body {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background: #FFDC00;
+}
+
+.container {
+    background: #FFFFFF;
+    width: 30%;
+    margin: 50px auto;
+    border-radius: 6px;
+    box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.4);  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.cb {
+    padding: 20px;
+    border-bottom: 1px solid #DDDDDD;
+    
+}
+
+input[type="checkbox"] {
+    margin: 5px;
+    vertical-align: middle;
+    position: absolute;
+}
+
+label {
+    padding: 0 5px;
+    padding-left: 1.4em;
+    display: inline-block;
+    margin-left: 5px;
+    
+}
+
+.strike {
+    text-decoration: line-through;
+}
