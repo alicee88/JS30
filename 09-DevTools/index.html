@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'Hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log("Just regular console logging");
+
+    // Interpolated
+    let someVar = 'GREAT';
+    console.log(`Console logging using ${someVar} backticks`);
+    console.log('You can also use %s variables', someVar);
+
+    // Styled
+    console.log('This is %c styled logging', 'font-size: 36px; background: red');
+
+    // warning!
+    console.warn('This will log the warning with yellow triangle and provide a stacktrace');
+
+    // Error :|
+    console.error('This will log with a red cross and provide a stacktrace');
+
+    // Info
+    console.info('This will log with a blue exclaimation mark');
+
+    // Testing
+    console.assert(1 === 2, 'This will log an assertion if the test (first argument) is false');
+    const para = document.querySelector('p');
+    console.assert(para.classList.contains('testFoThis'), 'Paragraph does not have the class you thought it would');
+
+    // clearing the log window
+    console.clear();
+
+    // Viewing DOM Elements - gives you a dropdown with all the methods on the element 
+    console.dir(para);
+
+    // Grouping together
+    dogs.forEach(dog => {
+        console.group(`${dog.name}`); // Or use groupCollapsed
+        console.log(`Hello ${dog.name}`);
+        console.log(`You are ${dog.age} human years old`);
+        console.log(`Which is ${dog.age * 7} dog years`);
+        console.groupEnd(`${dog.name}`);
+    });
+
+    // counting - counts how many times you've run the statement
+    console.count('Counting...');
+    console.count('Counting...');
+    console.count('Counting...');
+    console.count('Counting...');
+    console.count('Counting...');
+
+    // timing
+    console.time('Time to fetch data');
+    fetch('https://api.github.com/users/wesbos')
+        .then(data => data.json())
+        .then(data => {
+            console.timeEnd('Time to fetch data');
+        });
+
+  </script>
+</body>
+</html>
