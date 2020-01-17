@@ -1,14 +1,18 @@
 const player = document.querySelector('.player__video');
 const playButton = document.querySelector('.player__button');
-const volumeControl = document.querySelector('input[name="volume"');
+const volumeControl = document.querySelector('input[name="volume"]');
 const scrubberFullWidth = document.querySelector('.progress');
 const scrubber = document.querySelector('.progress__filled');
+const playbackSpeedControl = document.querySelector('input[name="playbackRate"]');
+const skipButton = document.querySelectorAll('.player__button');
 
 playButton.addEventListener('click', handlePlayButton);
-
 volumeControl.addEventListener('change', handleVolume);
 volumeControl.addEventListener('mousemove', handleVolume);
 scrubberFullWidth.addEventListener('click', handleProgress);
+playbackSpeedControl.addEventListener('change', handlePlaybackSpeed);
+playbackSpeedControl.addEventListener('mousemove', handlePlaybackSpeed);
+skipButton.forEach(button => button.addEventListener('click', handleSkip));
 
 async function playVideo() {
     try {
@@ -32,6 +36,17 @@ function handlePlayButton() {
 
 function handleVolume() {
     player.volume = this.value;
+}
+
+function handlePlaybackSpeed() {
+    player.playbackRate = this.value;
+}
+
+function handleSkip() {
+    if(!this.dataset.skip)
+        return;
+
+    player.currentTime += parseInt(this.dataset.skip);
 }
 
 function handleProgress(e) {
