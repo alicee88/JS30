@@ -1,34 +1,25 @@
-const cb = Array.from(document.querySelectorAll('input[type="checkbox"]'));
-const labels = Array.from(document.querySelectorAll('label'));
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', checkboxChecked));
 
-document.addEventListener('keydown', handleSelection);
-document.addEventListener('change', crossOffItem);
+let lastChecked;
 
-function handleSelection(e) {
-    if(e.key === 'Shift') {
+function checkboxChecked(e) {
+    if(e.shiftKey && this.checked) {
 
-        let firstIndex = cb.findIndex(checkbox => checkbox.checked);
-        let lastIndex = cb.length - (cb.slice().reverse().findIndex(checkbox => checkbox.checked));
+        let inbetween = false;
 
-        if(firstIndex === -1 || lastIndex === -1)
-            return;
+        checkboxes.forEach(checkbox => {
+            if(checkbox === lastChecked || checkbox === this)
+            {
+                inbetween = !inbetween;
+            }
 
-        if(firstIndex > lastIndex) {
-            let temp = firstIndex;
-            firstIndex = lastIndex;
-            lastIndex = temp;
-        }
-
-        for(let i = firstIndex; i < lastIndex; i++)
-        {
-            cb[i].checked = true;
-            labels[i].classList.add('strike');
-
-        }
+            if (inbetween) {
+                checkbox.checked = true;
+            }
+        });
     }
-}
 
-function crossOffItem(e) {
-    e.srcElement.labels[0].classList.toggle('strike');
+    lastChecked = this;
 }
