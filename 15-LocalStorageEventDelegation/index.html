@@ -23,17 +23,23 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <button class="checkAll">Check All</button>
+    <button class="reset">Reset</button>
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
   const itemPicker = document.querySelector('input[type="text"]');
+  const resetButton = document.querySelector('.reset');
+  const checkAllButton = document.querySelector('.checkAll');
  
   const items = JSON.parse(localStorage.getItem('foodItems')) || []; // Get items out of local storage
 
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
+  resetButton.addEventListener('click', handleReset);
+  checkAllButton.addEventListener('click', handleCheckAll);
 
   populateList(items, itemsList);
   
@@ -72,9 +78,21 @@
     if (!e.target.matches('input')) return; // Only care about the checkboxes, not the label
     // find the index of the one we want to check
     const index = e.target.dataset.index;
-    console.log(items[index]);
     items[index].done = !items[index].done;
     localStorage.setItem('foodItems', JSON.stringify(items));
+  }
+
+  function handleReset() {
+    itemsList.innerHTML = '<li>Loading Tapas...</li>';
+    items.splice(0);
+    localStorage.removeItem('foodItems');
+    populateList(items, itemsList);
+  }
+
+  function handleCheckAll() {
+    items.map(item => item.done = true);
+    localStorage.setItem('foodItems', JSON.stringify(items));
+    populateList(items, itemsList);
   }
 
 </script>
