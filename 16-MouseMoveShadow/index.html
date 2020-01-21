@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>🔥WOAH!</h1>
+  </div>
+
+  <style>
+  html {
+    color: black;
+    font-family: sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+
+  h1 {
+    /* text-shadow: offset-x, offset-y, blur radius, colour */
+    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    font-size: 100px;
+  }
+  </style>
+
+<script>
+    const moveArea = document.querySelector('.hero');
+    const editableH1 = moveArea.querySelector('h1');
+    const maxMovement = 100; // The maximum amount that the shadow can move
+
+    moveArea.addEventListener('mousemove', moveShadow);
+
+    function moveShadow(e) {
+
+        const {offsetWidth: width, offsetHeight: height} = moveArea;
+        let {offsetX: cursorX, offsetY: cursorY} = e;
+
+       // If you hover over a child of moveArea (i.e. the h1), the mouse pos coordinates will show the position relative to the h1, not the div. 
+       // So add on the extra X + Y from the top/left edge of the page to make it consistent, (regardless of whether the mouse is over the h1 or the div).
+       if(this != e.target) {
+           cursorX = cursorX + e.target.offsetLeft;
+           cursorY = cursorY + e.target.offsetTop;
+       }
+
+       // We want xShadowMove to be between -50 and 50 (half max movement on each side)
+       const xShadowMove = Math.round((cursorX / width) * maxMovement - (maxMovement / 2));
+       const yShadowMove = Math.round((cursorY / height) * maxMovement - (maxMovement / 2));
+       console.log('X '+xShadowMove);
+       console.log('Y '+yShadowMove);
+
+       editableH1.style.textShadow = `${xShadowMove}px ${yShadowMove}px 0 rgba(0,0,0,1)`
+    } 
+</script>
+</body>
+</html>
