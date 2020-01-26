@@ -123,3 +123,11 @@ fetch('https://api.github.com/users/wesbos')
 ## Sticky Nav: Fixes the nav bar when you've scrolled past it, and transitions in the logo
 * Add `position: fixed` once the page has scrolled past the navbar, but consider that this takes the navbar out of the control flow (so need to add back in the height of the navbar to avoid jumping text).
 * Nice scale effect from 98% -> 100% to enhance the focus of the page once the navbar has been fixed
+
+## Event Handlers: Edge cases with Event Handlers
+* Capture: When you click on the innermost div, the capture happens top to bottom (html -> body -> div1 -> div2 -> div3).
+* Bubbling: Once it's got to the innermost div, the events fire from bottom to top (div3 -> div2 -> div1 -> body -> html).
+* `addEventListener` can take a `capture` argument, which makes the events fire on capture (i.e. top -> bottom).
+* `addEventListener` can take a `once` argument, which unbinds the eventlistener after being triggered once (effectively removes the event handler altogether). Useful for checkouts when you don't want customers to pay for the item more than once.
+* `e.stopPropogation` will stop bubbling from happening (just fires for the innermost div, say).
+
