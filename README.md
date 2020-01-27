@@ -131,3 +131,8 @@ fetch('https://api.github.com/users/wesbos')
 * `addEventListener` can take a `once` argument, which unbinds the eventlistener after being triggered once (effectively removes the event handler altogether). Useful for checkouts when you don't want customers to pay for the item more than once.
 * `e.stopPropogation` will stop bubbling from happening (just fires for the innermost div, say).
 
+## Stripe Dropdown: Move smoothly between dropdowns
+* Nest the `<a>` tags within `<li>` so that event handlers can detect hover on the dropdown list - just listening to the `<a>` won't capture the dropped down elements
+* Note that `this` changes when you enter into a function (e.g. `setTimeout(function() {})`), but inherits from the parent if you use an arrow function instead (`setTimeout(() => {})`).
+* `display: block` and `opacity: 1` are set separately to give the nice hover over transition - similar to how Angular/React does transitions.
+* With the `setTimeout`, sometimes the class adds can get out of sync, so make sure to check if the enter class has been added before adding the active one.
