@@ -136,3 +136,7 @@ fetch('https://api.github.com/users/wesbos')
 * Note that `this` changes when you enter into a function (e.g. `setTimeout(function() {})`), but inherits from the parent if you use an arrow function instead (`setTimeout(() => {})`).
 * `display: block` and `opacity: 1` are set separately to give the nice hover over transition - similar to how Angular/React does transitions.
 * With the `setTimeout`, sometimes the class adds can get out of sync, so make sure to check if the enter class has been added before adding the active one.
+
+## Click And Drag Scroll: Scroll an element to the left or right and update its position, look and feel
+* `e.preventDefault()` stops any unwanted interaction with elements on the page that might interfere with the mousedown handling
+* `element.scrollLeft` gives you the number of pixels that the element has scrolled, and you can set this to actually move the item.
