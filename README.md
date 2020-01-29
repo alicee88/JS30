@@ -140,3 +140,6 @@ fetch('https://api.github.com/users/wesbos')
 ## Click And Drag Scroll: Scroll an element to the left or right and update its position, look and feel
 * `e.preventDefault()` stops any unwanted interaction with elements on the page that might interfere with the mousedown handling
 * `element.scrollLeft` gives you the number of pixels that the element has scrolled, and you can set this to actually move the item.
+
+## Video Speed Controller: Dynamically speed up/slow down video with a custom control
+
