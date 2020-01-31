@@ -22,13 +22,16 @@
   function changeSpeed(e) {
     const topPos = e.pageY - this.offsetTop;
     const barPercent = (topPos / this.offsetHeight) * 100;
+    const timesX = barPercent / 25;
 
     speedBar.style.height = `${barPercent}%`;
-    if(barPercent / 25 > 0.5 && barPercent / 25 < 1) {
+    if(timesX > 0.5 && timesX < 1) {
       speedBar.textContent = '0.5x';
     } else {
-      speedBar.textContent = `${Math.round(barPercent / 25)}x`;
+      speedBar.textContent = `${Math.round(timesX)}x`;
     }
+
+    video.playbackRate = timesX;
 
   }
 

@@ -142,4 +142,4 @@ fetch('https://api.github.com/users/wesbos')
 * `element.scrollLeft` gives you the number of pixels that the element has scrolled, and you can set this to actually move the item.
 
 ## Video Speed Controller: Dynamically speed up/slow down video with a custom control
-
+* Set the speed to be between 0.4x and 4x, where percent is 0-1 size of the bar: `const speed = percent * (max - min) + min;`
