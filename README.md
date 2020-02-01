@@ -143,3 +143,12 @@ fetch('https://api.github.com/users/wesbos')
 
 ## Video Speed Controller: Dynamically speed up/slow down video with a custom control
 * Set the speed to be between 0.4x and 4x, where percent is 0-1 size of the bar: `const speed = percent * (max - min) + min;`
+
+## Countdown Timer: Displays countdown and the time when the countdown will finish
+* `setInterval` sometimes doesn't run, e.g. if you tab away for a while, the interval stops working. iOS pauses intervals when scrolling.
+* `Date.now()` - new static method that returns current time in milliseconds.
+* `clearInterval(nameOfFunctionToStop)` stops the interval. `nameOfFunctionToStop = setInterval(...)` needed to set it in the first place.
+* `setInterval` does not run immediately - it waits for the first second to lapse
+* Convert timestamp (e.g. `Date.now()`) to actual date by using new `Date(timestamp)`.
+* If an element has a name attribute, you can access it directly from the DOM using `element.name`, e.g. `document.customForm.minutes` will access the named input field minutes.
+* `e.preventDefault()` on the submit eventhandler stops the page reloading on submit.
